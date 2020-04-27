@@ -277,7 +277,7 @@
 #ifdef CONFIG_CMD_USB
 #define BOOTENV_RUN_NET_USB_START "run boot_net_usb_start; "
 #define BOOTENV_SHARED_USB \
-	"boot_net_usb_start=usb start\0" \
+	"boot_net_usb_start=;\0" \
 	"usb_boot=" \
 		"usb start; " \
 		BOOTENV_SHARED_BLKDEV_BODY(usb)
@@ -413,7 +413,8 @@
 #define BOOTENV_DEV_NAME(devtypeu, devtypel, instance) \
 	BOOTENV_DEV_NAME_##devtypeu(devtypeu, devtypel, instance)
 #define BOOTENV_BOOT_TARGETS \
-	"boot_targets=" BOOT_TARGET_DEVICES(BOOTENV_DEV_NAME) "\0"
+	"bootcmd_spi=test \"$boot_source\" = \"spi\" && sf probe && sf read $loadaddr 0x160000 0x008000 && script - - 0 1\0" \
+	"boot_targets=spi usb0 " BOOT_TARGET_MMC(BOOTENV_DEV_NAME) " pxe dhcp \0"
 
 #define BOOTENV_DEV(devtypeu, devtypel, instance) \
 	BOOTENV_DEV_##devtypeu(devtypeu, devtypel, instance)
