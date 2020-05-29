@@ -58,12 +58,19 @@
 #define BOOT_TARGET_DEVICES_USB(func)
 #endif
 
+#if CONFIG_IS_ENABLED(CMD_MMC)
+    #define BOOT_TARGET_MMC(func) \
+	func(MMC, mmc, 0) \
+	func(MMC, mmc, 1) \
+	func(MMC, mmc, 2)
+#else
+    #define BOOT_TARGET_MMC(func)
+#endif
+
 #ifndef BOOT_TARGET_DEVICES
 #define BOOT_TARGET_DEVICES(func) \
 	func(ROMUSB, romusb, na)  \
-	func(MMC, mmc, 0) \
-	func(MMC, mmc, 1) \
-	func(MMC, mmc, 2) \
+	BOOT_TARGET_MMC(func) \
 	BOOT_TARGET_DEVICES_USB(func) \
 	func(PXE, pxe, na) \
 	func(DHCP, dhcp, na)
