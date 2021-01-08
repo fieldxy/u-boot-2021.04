@@ -2339,7 +2339,6 @@ config CMD_UBIFS
 
 config CMD_KHADAS_KBI
 	bool "Khadas Bootloader Instructions"
-	depends on TARGET_EVB_RK3399
 	help
 	  Khadas Bootloader Instructions
 
