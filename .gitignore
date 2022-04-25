@@ -95,7 +95,15 @@ GTAGS
 *.orig
 *~
 \#*#
-/fip/
+#/fip/
 
 # Python cache
 __pycache__
+
+# fip
+
+/fip/*.enc
+/fip/*.sig
+/fip/*_new.bin
+/fip/*_zero.bin
+/fip/u-boot.*
